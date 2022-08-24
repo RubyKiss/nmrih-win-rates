@@ -697,7 +697,7 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 		char query[512];
 		char escape_steam_id[72];
 		g_Database.Escape(g_SteamID[client], escape_steam_id, sizeof(escape_steam_id));
-		Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_rate = (CAST(clear_count AS REAL)/CAST(play_count+1 AS REAL))*100 WHERE map_name = '%s' AND steam_id = '%s';", g_TableName, g_MapName, escape_steam_id);
+		Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_rate = (clear_count/(play_count+1))*100 WHERE map_name = '%s' AND steam_id = '%s';", g_TableName, g_MapName, escape_steam_id);
 		g_Database.Query(T_Generic, query);
 	}
 	return Plugin_Continue;
@@ -735,7 +735,7 @@ public Action Event_PlayerExtracted(Event event, const char[] name, bool dontBro
 	char query[512];
 	char escape_steam_id[72];
 	g_Database.Escape(g_SteamID[client], escape_steam_id, sizeof(escape_steam_id));
-	Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_count = clear_count+1, clear_rate = (CAST(clear_count+1 AS REAL)/CAST(play_count+1 AS REAL))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
+	Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_count = clear_count+1, clear_rate = ((clear_count+1)/(play_count+1))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
 	g_Database.Query(T_Generic, query);
 	return Plugin_Continue;
 }
@@ -788,7 +788,7 @@ public void Event_StateChange(Event event, const char[] name, bool dontBroadcast
 							char query[512];
 							char escape_steam_id[72];
 							g_Database.Escape(g_SteamID[i], escape_steam_id, sizeof(escape_steam_id));
-							Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_count = clear_count+1, clear_rate = (CAST(clear_count AS REAL)/CAST(play_count+1 AS REAL))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
+							Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_count = clear_count+1, clear_rate = ((clear_count)/(play_count+1))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
 							g_Database.Query(T_Generic, query);
 						}
 					}
@@ -820,7 +820,7 @@ public void AlivePlayersLose()
 					char query[512];
 					char escape_steam_id[72];
 					g_Database.Escape(g_SteamID[i], escape_steam_id, sizeof(escape_steam_id));
-					Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_rate = (CAST(clear_count AS REAL)/CAST(play_count+1 AS REAL))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
+					Format(query, sizeof(query), "UPDATE %s SET play_count = play_count+1, clear_rate = ((clear_count)/(play_count+1))*100 WHERE steam_id = '%s' AND map_name = '%s';", g_TableName, escape_steam_id, g_MapName);
 					g_Database.Query(T_Generic, query);
 				}
 			}
