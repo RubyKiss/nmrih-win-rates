@@ -30,10 +30,29 @@ https://forums.alliedmods.net/showthread.php?p=2714046
 - Edit `configs/winrates_exclude.cfg` --> Add excluded maps from plugin detection, won't be taken into account
 - Edit `configs/databases.cfg` --> Insert a new keyvalue set like the following example:
 
-`"nmrih_winrates"
-{
-   "driver" "sqlite"
-   "database" "nmrih_winrates"
-}`
+```
+
+在databases.cfg 文件添加以下东西
+
+
+	
+	"nmrih_winrates"
+	{
+		"driver"		"mysql"
+		"host"			"localhost"
+		"database"		"nmrih_winrate_data"
+		"user"			"root"
+		"pass"			"root"
+	}
+
+
+
+2.下载一个MYSQL数据库到本服务器
+3.创建一个数据库名为 nmrih_winrate_data 的数据库
+4.完成
+
+
+
+```
 
 - Inspired by Dayonn_dayonn plugin: https://forums.alliedmods.net/showthread.php?p=2578250
