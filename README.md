@@ -1,6 +1,7 @@
 # NMRiH - Win Rates
 Records and display winrate stats for every map played in a NMRiH server, inspired by Dayonn_dayonn, uses SQL threaded queries in order to avoid crashes and solves lots of bugs from before.
 
+这是原插件地址：
 https://forums.alliedmods.net/showthread.php?p=2714046
 
 ![image](https://i.imgur.com/jJKgIP0.jpeg)
